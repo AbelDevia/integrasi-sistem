@@ -16,11 +16,11 @@
 
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h5 class="card-title text-primary">Data Penyakit</h5>
-                            <a href="{{ route('penyakit.create') }}" class="btn btn-primary btn-sm">Add Penyakit</a>
+                            <a href="{{ route('penyakit.create') }}" class="btn btn-primary btn-sm">Tambah</a>
                         </div>
 
                         <div class="card-body">
-                            <table class="table table-bordered">
+                            <table id="penyakitTable" class="table table-bordered">
                                 <thead class="table-light">
                                     <tr>
                                         <th>No</th>
@@ -59,6 +59,7 @@
                                     @endforelse
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
                 </div>
