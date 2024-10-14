@@ -79,27 +79,13 @@
                          <div data-i18n="Penyakit">Data Penyakit</div>
                      </a>
                  </li>
+                 <li class="menu-item">
+                     <a href="{{ route('users.index') }}" class="menu-link">
+                         <div data-i18n="User">Data User</div>
+                     </a>
+                 </li>
 
-                 <li class="menu-item">
-                     <a href="layouts-without-navbar.html" class="menu-link">
-                         <div data-i18n="Without navbar">Without navbar</div>
-                     </a>
-                 </li>
-                 <li class="menu-item">
-                     <a href="layouts-container.html" class="menu-link">
-                         <div data-i18n="Container">Container</div>
-                     </a>
-                 </li>
-                 <li class="menu-item">
-                     <a href="layouts-fluid.html" class="menu-link">
-                         <div data-i18n="Fluid">Fluid</div>
-                     </a>
-                 </li>
-                 <li class="menu-item">
-                     <a href="layouts-blank.html" class="menu-link">
-                         <div data-i18n="Blank">Blank</div>
-                     </a>
-                 </li>
+
              </ul>
          </li>
 
