@@ -8,6 +8,12 @@
             <div class="row">
                 <div class="col-lg-12 mb-4 order-0">
                     <div class="card">
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h5 class="card-title text-primary">Data Penyakit</h5>
                             <a href="{{ route('penyakit.create') }}" class="btn btn-primary btn-sm">Add Penyakit</a>
@@ -34,11 +40,11 @@
                                             <td>{{ $penyakit->deskripsi }}</td>
                                             <td>{{ $penyakit->rekomendasi }}</td>
                                             <td>
-                                                <a href="{{ route('penyakit.edit', $penyakit->id) }}" 
-                                                   class="btn btn-warning btn-sm">Edit</a>
+                                                <a href="{{ route('penyakit.edit', $penyakit->id) }}"
+                                                    class="btn btn-warning btn-sm">Edit</a>
 
-                                                <form action="{{ route('penyakit.destroy', $penyakit->id) }}" 
-                                                      method="POST" style="display: inline-block;">
+                                                <form action="{{ route('penyakit.destroy', $penyakit->id) }}" method="POST"
+                                                    style="display: inline-block;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"
