@@ -1,6 +1,6 @@
-<?php
+php<?php
 
-namespace App\Http\Controllers;
+App\Http\Controllers;
 
 use App\Models\Penyakit;
 use Illuminate\Http\Request;
