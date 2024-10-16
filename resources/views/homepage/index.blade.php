@@ -44,7 +44,6 @@
                                     data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     Best useful links ?
                                 </button>
-                            </h2>
                             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                                 data-bs-parent="#accordionExample">
                                 <div class="accordion-body">

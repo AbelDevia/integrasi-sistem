@@ -178,6 +178,29 @@
         });
     });
 </script>
+<script>
+    $(document).ready(function() {
+        $('#gejalaTable').DataTable({
+            "paging": true, // Aktifkan paginasi
+            "searching": true, // Aktifkan pencarian
+            "info": true, // Tampilkan informasi jumlah data
+            "autoWidth": false, // Nonaktifkan auto width
+            "ordering": true, // Aktifkan pengurutan
+            "language": {
+                "lengthMenu": "Tampilkan _MENU_ data per halaman",
+                "zeroRecords": "Tidak ada data yang ditemukan",
+                "info": "Menampilkan _PAGE_ dari _PAGES_ halaman",
+                "infoEmpty": "Tidak ada data yang tersedia",
+                "infoFiltered": "(disaring dari _MAX_ total data)",
+                "search": "Cari:",
+                "paginate": {
+                    "next": "Berikutnya",
+                    "previous": "Sebelumnya"
+                }
+            }
+        });
+    });
+</script>
 
   </body>
 </html>
