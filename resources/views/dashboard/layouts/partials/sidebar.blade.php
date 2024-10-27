@@ -94,13 +94,17 @@
                  </li>
                  <li class="menu-item">
                      <a href="{{ route('gejala.index') }}" class="menu-link">
-                         <div data-i18n="User">Data Gejala</div>
+                         <div data-i18n="Gejala">Data Gejala</div>
                      </a>
                  </li>
-
-
+                 <li class="menu-item">
+                     <a href="{{ route('basis_pengetahuan.index') }}" class="menu-link">
+                         <div data-i18n="BasisPengetahuan">Basis Pengetahuan</div>
+                     </a>
+                 </li>
              </ul>
          </li>
+
 
          <!-- Logout Menu Item -->
          <li class="menu-item">

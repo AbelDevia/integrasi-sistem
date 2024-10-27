@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BasisPengetahuanController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GejalaController;
 use App\Http\Controllers\PenyakitController;
@@ -20,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('gejala', GejalaController::class);
     Route::resource('kambing', KambingController::class);
+    Route::resource('basis_pengetahuan', BasisPengetahuanController::class);
 
     Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
 });
