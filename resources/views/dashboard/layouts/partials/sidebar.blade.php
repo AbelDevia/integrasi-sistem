@@ -88,11 +88,6 @@
                      </a>
                  </li>
                  <li class="menu-item">
-                     <a href="{{ route('users.index') }}" class="menu-link">
-                         <div data-i18n="User">Data User</div>
-                     </a>
-                 </li>
-                 <li class="menu-item">
                      <a href="{{ route('gejala.index') }}" class="menu-link">
                          <div data-i18n="Gejala">Data Gejala</div>
                      </a>
@@ -105,6 +100,19 @@
              </ul>
          </li>
 
+         <li class="menu-item {{ request()->routeIs('users.*') ? 'active' : '' }}">
+             <a href="{{ route('users.index') }}" class="menu-link">
+                 <i class="menu-icon tf-icons bx bx-user"></i>
+                 <div data-i18n="Users">Data User</div>
+             </a>
+         </li>
+
+         <li class="menu-item {{ request()->routeIs('kegiatan.*') ? 'active' : '' }}">
+             <a href="{{ route('kegiatan.index') }}" class="menu-link">
+                 <i class="menu-icon tf-icons bx bx-calendar-event"></i>
+                 <div data-i18n="Kegiatan">Data Kegiatan</div>
+             </a>
+         </li>
 
          <!-- Logout Menu Item -->
          <li class="menu-item">
