@@ -15,7 +15,7 @@ class KegiatanController extends Controller
 
     public function create()
     {
-        return view('kegiatan.create');
+        return view('dashboard.kegiatan.create');
     }
 
     public function store(Request $request)
@@ -34,7 +34,7 @@ class KegiatanController extends Controller
     public function edit($id)
     {
         $kegiatan = Kegiatan::findOrFail($id);
-        return view('kegiatan.edit', compact('kegiatan'));
+        return view('dashboard.kegiatan.edit', compact('kegiatan'));
     }
 
     public function update(Request $request, $id)
