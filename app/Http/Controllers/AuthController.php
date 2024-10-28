@@ -39,8 +39,8 @@ class AuthController extends Controller
         Auth::logout(); // Logout the user
 
         // Optional: Flash a message to the session
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        $request->session()->invalidate(); // dinonaktifkan
+        $request->session()->regenerateToken(); // 
 
         return redirect('/login')->with('status', 'You have been logged out successfully.'); // Redirect to login page with a message
     }
