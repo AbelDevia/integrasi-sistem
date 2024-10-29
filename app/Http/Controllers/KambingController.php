@@ -10,6 +10,7 @@ class KambingController extends Controller
     public function index()
     {
         $kambings = Kambing::all();
+        // dd($kambings);
         return view('dashboard.kambing.index', compact('kambings'));
     }
 
