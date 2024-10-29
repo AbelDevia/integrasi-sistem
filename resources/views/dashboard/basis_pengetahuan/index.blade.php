@@ -4,21 +4,21 @@
     <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12 mb-4 order-0">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Data Basis Pengetahuan</h5>
-                        </div>
-                        <div class="card-body">
-                            <!-- Menampilkan pesan sukses jika ada -->
                             @if (session('success'))
                                 <div class="alert alert-success">
                                     {{ session('success') }}
                                 </div>
                             @endif
 
-                            <a href="{{ route('basis_pengetahuan.create') }}" class="btn btn-primary mb-3">Tambah Data</a>
-
+                            
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="card-title text-primary">Data Basis Pengetahuan</h5>
+                                <a href="{{ route('basis_pengetahuan.create') }}" class="btn btn-primary btn-sm">Tambah</a>
+                            </div>
+                           
                             <table id="basisPengetahuanTable" class="table table-bordered">
                                 <thead class="table-light">
                                     <tr>

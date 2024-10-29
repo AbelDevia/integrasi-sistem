@@ -16,7 +16,7 @@
 
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h5 class="card-title text-primary">Data Gejala</h5>
-                            <a href="{{ route('gejala.create') }}" class="btn btn-primary btn-sm">Tambah Gejala</a>
+                            <a href="{{ route('gejala.create') }}" class="btn btn-primary btn-sm">Tambah</a>
                         </div>
 
                         <div class="card-body">
