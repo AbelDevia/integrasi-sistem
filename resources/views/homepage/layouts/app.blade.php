@@ -38,8 +38,8 @@ https://templatemo.com/tm-591-villa-agency
             <div class="row">
                 <div class="col-lg-8 col-md-8">
                     <ul class="info">
-                        <li><i class="fa fa-envelope"></i> info@company.com</li>
-                        <li><i class="fa fa-map"></i> Sunny Isles Beach, FL 33160</li>
+                        <li><i class="fa fa-envelope"></i> infoternak@sipakam.com</li>
+                        <li><i class="fa fa-map"></i> Pelaihari, Kalimantan Selatan</li>
                     </ul>
                 </div>
                 <div class="col-lg-4 col-md-4">
