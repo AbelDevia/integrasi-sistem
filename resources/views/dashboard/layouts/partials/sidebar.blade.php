@@ -40,14 +40,15 @@
                                  <g id="Triangle"
                                      transform="translate(19.000000, 11.000000) rotate(-300.000000) translate(-19.000000, -11.000000) ">
                                      <use fill="#696cff" xlink:href="#path-5"></use>
-                                     <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-5"></use>
+                                     <use fill-opacity="0.2" fill="#228B22" xlink:href="#path-5"></use>
                                  </g>
                              </g>
                          </g>
                      </g>
                  </svg>
              </span>
-             <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+
+             <span class="app-brand-text demo menu-text fw-bolder ms-2" style="text-transform: uppercase;">SIPAKAM</span>
          </a>
 
          <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
