@@ -1,9 +1,7 @@
 <footer>
     <div class="container">
         <div class="col-lg-8">
-            <p>Copyright © 2048 Villa Agency Co., Ltd. All rights reserved.
-                Design: <a rel="nofollow" href="https://templatemo.com" target="_blank">TemplateMo</a>
-                Distribution: <a href="https://themewagon.com">ThemeWagon</a></p>
+            <p>Hak Cipta © 2024 Sistem Pakar Diagnosis Penyakit Kambing. Semua hak dilindungi.</a>
         </div>
     </div>
 </footer>
