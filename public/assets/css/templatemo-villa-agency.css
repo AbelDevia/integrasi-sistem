@@ -413,7 +413,7 @@ Header Style
 }
 
 .sub-header ul.social-links li a:hover {
-    background-color: #f35525;
+    background-color: #228B22;
 }
 
 .sub-header ul.info li {
@@ -866,7 +866,7 @@ Banner Style
 }
 
 .main-banner .owl-dots .active {
-    background-color: #f35525;
+    background-color: #228b22;
 }
 
 .main-banner .owl-nav {
