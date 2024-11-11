@@ -7,4 +7,16 @@ class HomepageController extends Controller
     {
         return view('homepage.index');
     }
+    public function informasi()
+    {
+        return view('homepage.informasi');
+    }
+    public function metode()
+    {
+        return view('homepage.metode');
+    }
+    public function kontak()
+    {
+        return view('homepage.kontak');
+    }
 }

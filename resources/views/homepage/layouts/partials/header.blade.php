@@ -10,11 +10,15 @@
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li><a href="index.html" class="active">Home</a></li>
-                        <li><a href="properties.html">Informasi</a></li>
-                        <li><a href="property-details.html">Metode</a></li>
-                        <li><a href="contact.html">Kontak</a></li>
-                        <li><a href="{{ route('login') }}"><i class="fa fa-key"></i> Login</a></li>
+                        <li><a href="{{ route('homepage') }}" class="{{ Request::is('/') ? 'active' : '' }}">Home</a></li>
+                        <li><a href="{{ route('informasi') }}"
+                                class="{{ Request::is('informasi') ? 'active' : '' }}">Informasi</a></li>
+                        <li><a href="{{ route('metode') }}"
+                                class="{{ Request::is('metode') ? 'active' : '' }}">Metode</a></li>
+                        <li><a href="{{ route('kontak') }}"
+                                class="{{ Request::is('kontak') ? 'active' : '' }}">Kontak</a></li>
+                        <li><a href="{{ route('login') }}" class="{{ Request::is('login') ? 'active' : '' }}"><i
+                                    class="fa fa-key"></i> Login</a></li>
                     </ul>
                     <a class='menu-trigger'>
                         <span>Menu</span>
