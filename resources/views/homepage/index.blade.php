@@ -10,8 +10,8 @@
             </div>
             <div class="item item-2">
                 <div class="header-text">
-                    <span class="category">Melbourne, <em>Australia</em></span>
-                    <h2>Be Quick!<br>Get the best villa in town</h2>
+                    <span class="category">Pelaihari, <em>Kalimantan Selatan</em></span>
+                    <h2>Bergegas!<br>Dapatkan Solusi Terbaik Dan Terpercaya</h2>
                 </div>
             </div>
             <div class="item item-3">
