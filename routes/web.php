@@ -9,7 +9,17 @@ use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\KambingController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\GoogleController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GoogleCalendarController;
+
+
+Route::get('auth/google', [GoogleCalendarController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('auth/google/callback', [GoogleCalendarController::class, 'handleGoogleCallback']);
+Route::get('google-calendar', [GoogleCalendarController::class, 'listEvents'])->name('google.calendar');
+Route::post('google-calendar/event', [GoogleCalendarController::class, 'createEvent'])->name('google.calendar.create');
+Route::get('kegiatan/{id}/google-calendar', [GoogleCalendarController::class, 'addToGoogleCalendar'])
+    ->name('kegiatan.addToGoogleCalendar');
 
 Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 Route::get('/informasi', [HomepageController::class, 'informasi'])->name('informasi');
