@@ -32,13 +32,23 @@
                                     <td>{{ $kegiatan->tanggal }}</td>
                                     <td>{{ ucfirst($kegiatan->status) }}</td>
                                     <td>
-                                        <a href="{{ route('kegiatan.edit', $kegiatan->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                        <form action="{{ route('kegiatan.destroy', $kegiatan->id) }}" method="POST" style="display:inline;">
+                                        <a href="{{ route('kegiatan.edit', $kegiatan->id) }}"
+                                            class="btn btn-warning btn-sm">Edit</a>
+                                        <form action="{{ route('kegiatan.destroy', $kegiatan->id) }}" method="POST"
+                                            style="display:inline;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm"
                                                 onclick="return confirm('Apakah Anda yakin ingin menghapus kegiatan ini?')">Delete</button>
                                         </form>
+                                        @if (!$kegiatan->google_event_id)
+                                            <a href="{{ route('kegiatan.addToGoogleCalendar', $kegiatan->id) }}"
+                                                class="btn btn-success btn-sm" title="Sinkronkan ke Google Calendar">
+                                                <i class="bi bi-arrow-repeat"></i> <!-- Ikon sinkronisasi -->
+                                            </a>
+                                        @else
+                                            <span class="badge bg-success">Sudah Sinkron</span>
+                                        @endif
                                     </td>
                                 </tr>
                             @empty

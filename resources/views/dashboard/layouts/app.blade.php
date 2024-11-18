@@ -57,6 +57,7 @@
 
 <!-- Page CSS -->
 <!-- You can add your page-specific CSS here -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
 <!-- Helpers -->
 <script src="{{ asset('dashboard_assets/assets/vendor/js/helpers.js') }}"></script>
