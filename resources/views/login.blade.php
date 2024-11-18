@@ -187,12 +187,6 @@
                 <div class="mb-3">
                 <button class="btn btn-primary d-grid w-100" type="submit" style="background-color: #4CAF50;">Sign in</button>
                 </div>
-                <div class="mb-3">
-                  <a href="{{ route('google.login') }}" class="btn btn-danger d-grid w-100" style="background-color: #DB4437;">
-                      <i class="bx bxl-google me-2"></i> Login with Google
-                  </a>
-              </div>
-              
             </form>
             
 
