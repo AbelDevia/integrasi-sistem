@@ -186,7 +186,6 @@
             
                 <div class="mb-3">
                 <button class="btn btn-primary d-grid w-100" type="submit" style="background-color: #4CAF50;">Sign in</button>
-
                 </div>
             </form>
             
