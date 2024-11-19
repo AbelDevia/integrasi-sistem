@@ -71,7 +71,7 @@ class GoogleCalendarController extends Controller
     public function listEvents()
     {
         $token = session('google_token');
-
+$kegiatans = Kegiatan::all();
         if (!$token) {
             return redirect('/auth/google')->withErrors('Google token not found.');
         }
@@ -83,7 +83,7 @@ class GoogleCalendarController extends Controller
         $calendarId = 'primary'; // Kalender utama pengguna
         $events = $service->events->listEvents($calendarId);
 
-        return view('google-calendar.events', ['events' => $events->getItems()]);
+        return view('dashboard.kegiatan.index', ['kegiatans'=>$kegiatans,'events' => $events->getItems()]);
     }
 
     public function createEvent(Request $request)

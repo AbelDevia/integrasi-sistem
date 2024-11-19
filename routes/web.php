@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoogleCalendarController;
 
 
-Route::get('auth/google', [GoogleCalendarController::class, 'redirectToGoogle'])->name('google.login');
-Route::get('auth/google/callback', [GoogleCalendarController::class, 'handleGoogleCallback']);
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 Route::get('google-calendar', [GoogleCalendarController::class, 'listEvents'])->name('google.calendar');
 Route::post('google-calendar/event', [GoogleCalendarController::class, 'createEvent'])->name('google.calendar.create');
 Route::get('kegiatan/{id}/google-calendar', [GoogleCalendarController::class, 'addToGoogleCalendar'])
