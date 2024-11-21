@@ -6,24 +6,54 @@ use App\Models\Kegiatan;
 use Illuminate\Http\Request;
 use Google\Client as GoogleClient;
 use Google\Service\Calendar;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
 class GoogleCalendarController extends Controller
 {
     public function addToGoogleCalendar($id)
     {
+        // Ambil kegiatan berdasarkan ID
         $kegiatan = Kegiatan::findOrFail($id);
     
-        $token = session('google_token');
+        // Ambil pengguna yang sedang login
+        $user = Auth::user();
+    
+        // Ambil token dan refresh token dari database
+        $token = $user->google_token;
+        $refreshToken = $user->google_refresh_token;
+    
+        // Jika token tidak ada, arahkan ke halaman login Google
         if (!$token) {
             return redirect('/auth/google')->withErrors('Google token not found.');
         }
     
+        // Membuat client Google
         $client = new \Google\Client();
-        $client->setAccessToken($token);
     
+        // Set token akses
+        $client->setAccessToken($token);
+    // dd($client);
+        // Periksa jika token sudah kedaluwarsa
+        if ($client->isAccessTokenExpired()) {
+            // dd($client->isAccessTokenExpired());
+
+            // Jika token sudah kadaluarsa, gunakan refresh token untuk mendapatkan token baru
+            if ($refreshToken) {
+                // dd($refreshToken);
+                $client->fetchAccessTokenWithRefreshToken($refreshToken);
+                $user->google_token = $client->getAccessToken(); // Simpan token baru ke database
+                $user->save();
+            } else {
+                // Jika refresh token tidak ada, arahkan pengguna untuk login ulang
+                return redirect('/kegiatan')->withErrors('Google refresh token not found.');
+            }
+        }
+    
+        // Membuat servis Google Calendar
         $service = new \Google\Service\Calendar($client);
     
+        // Menyiapkan acara untuk ditambahkan ke Google Calendar
         $event = new \Google\Service\Calendar\Event([
             'summary' => $kegiatan->deskripsi,
             'start' => [
@@ -36,42 +66,25 @@ class GoogleCalendarController extends Controller
             ],
         ]);
     
+        // ID kalender utama pengguna
         $calendarId = 'primary';
+    
+        // Menambahkan acara ke Google Calendar
         $googleEvent = $service->events->insert($calendarId, $event);
     
-        // Simpan google_event_id ke database
+        // Simpan ID acara Google ke database
         $kegiatan->google_event_id = $googleEvent->id;
         $kegiatan->save();
     
+        // Redirect dengan pesan sukses
         return redirect()->route('kegiatan.index')->with('success', 'Kegiatan berhasil ditambahkan ke Google Calendar.');
     }
     
 
-    public function redirectToGoogle()
-    {
-        return Socialite::driver('google')
-            ->scopes(['https://www.googleapis.com/auth/calendar'])
-            ->redirect();
-    }
-
-    public function handleGoogleCallback()
-    {
-        try {
-            $googleUser = Socialite::driver('google')->stateless()->user();
-            
-            // Simpan token untuk digunakan nanti
-            session(['google_token' => $googleUser->token]);
-
-            return redirect('/google-calendar');
-        } catch (\Exception $e) {
-            return redirect('/login')->withErrors('Login with Google failed!');
-        }
-    }
-
     public function listEvents()
     {
         $token = session('google_token');
-
+$kegiatans = Kegiatan::all();
         if (!$token) {
             return redirect('/auth/google')->withErrors('Google token not found.');
         }
@@ -83,7 +96,11 @@ class GoogleCalendarController extends Controller
         $calendarId = 'primary'; // Kalender utama pengguna
         $events = $service->events->listEvents($calendarId);
 
+<<<<<<< HEAD
         return view('dashboard.kegiatan.index', ['events' => $events->getItems()]);
+=======
+        return view('dashboard.kegiatan.index', ['kegiatans'=>$kegiatans,'events' => $events->getItems()]);
+>>>>>>> b4e237756caa3f842cb15867a64b477a698f1e70
     }
 
     public function createEvent(Request $request)
