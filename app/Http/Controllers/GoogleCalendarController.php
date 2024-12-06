@@ -96,7 +96,15 @@ $kegiatans = Kegiatan::all();
         $calendarId = 'primary'; // Kalender utama pengguna
         $events = $service->events->listEvents($calendarId);
 
+<<<<<<< HEAD
         return view('dashboard.kegiatan.index', ['events' => $events->getItems()]);
+=======
+<<<<<<< HEAD
+        return view('dashboard.kegiatan.index', ['events' => $events->getItems()]);
+=======
+        return view('dashboard.kegiatan.index', ['kegiatans'=>$kegiatans,'events' => $events->getItems()]);
+>>>>>>> b4e237756caa3f842cb15867a64b477a698f1e70
+>>>>>>> 51c5e094836f8e1008e5b4c86a2c5bf42e8847cd
     }
 
     public function createEvent(Request $request)
