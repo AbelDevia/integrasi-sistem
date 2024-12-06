@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ProsesApiController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BasisPengetahuanController;
 use App\Http\Controllers\DashboardController;
@@ -12,10 +13,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\GoogleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoogleCalendarController;
+use App\Http\Controllers\ProsesController;
 
-
-Route::get('auth/google', [GoogleCalendarController::class, 'redirectToGoogle'])->name('google.login');
-Route::get('auth/google/callback', [GoogleCalendarController::class, 'handleGoogleCallback']);
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 Route::get('google-calendar', [GoogleCalendarController::class, 'listEvents'])->name('google.calendar');
 Route::post('google-calendar/event', [GoogleCalendarController::class, 'createEvent'])->name('google.calendar.create');
 Route::get('kegiatan/{id}/google-calendar', [GoogleCalendarController::class, 'addToGoogleCalendar'])
@@ -37,6 +38,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('kambing', KambingController::class);
     Route::resource('basis_pengetahuan', BasisPengetahuanController::class);
     Route::resource('kegiatan', KegiatanController::class);
+
+    Route::get('/proses', [ProsesController::class, 'index'])->name('proses.index');
+    Route::post('/proses/calculate', [ProsesApiController::class, 'calculate'])->name('api.proses.calculate');
+
 
     Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
 });
