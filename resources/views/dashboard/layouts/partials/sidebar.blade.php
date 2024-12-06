@@ -48,7 +48,8 @@
                  </svg>
              </span>
 
-             <span class="app-brand-text demo menu-text fw-bolder ms-2" style="text-transform: uppercase;">SIPAKAM</span>
+             <span class="app-brand-text demo menu-text fw-bolder ms-2"
+                 style="text-transform: uppercase;">SIPAKAM</span>
          </a>
 
          <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -114,6 +115,13 @@
                  <div data-i18n="Kegiatan">Data Kegiatan</div>
              </a>
          </li>
+         <li class="menu-item {{ request()->routeIs('proses.*') ? 'active' : '' }}">
+             <a href="{{ route('proses.index') }}" class="menu-link">
+                 <i class="menu-icon tf-icons bx bx-calculator"></i>
+                 <div data-i18n="Proses">Proses</div>
+             </a>
+         </li>
+
 
          <!-- Logout Menu Item -->
          <li class="menu-item">
