@@ -44,7 +44,7 @@
                                         @if (!$kegiatan->google_event_id)
                                             <a href="{{ route('kegiatan.addToGoogleCalendar', $kegiatan->id) }}"
                                                 class="btn btn-success btn-sm" title="Sinkronkan ke Google Calendar">
-                                                <i class="bi bi-arrow-repeat"></i> <!-- Ikon sinkronisasi -->
+                                                <i class="bi bi-arrow-repeat"></i>  <!--Ikon sinkronisasi-->
                                             </a>
                                         @else
                                             <span class="badge bg-success">Sudah Sinkron</span>
