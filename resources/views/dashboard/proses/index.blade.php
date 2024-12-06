@@ -11,7 +11,7 @@
                         </div>
                         <div class="card-body">
                             <form id="forwardChainingForm">
-                                <p class="mb-3">Pilih gejala yang sesuai dengan keadaan kambing Anda:</p>
+                                <p class="mb-3">Pilih gejala yang sesuai dengan keadaan kambing:</p>
                                 <div class="row">
                                     @foreach ($gejalas as $gejala)
                                         <div class="col-md-4">
