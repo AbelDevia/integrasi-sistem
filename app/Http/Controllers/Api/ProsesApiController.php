@@ -1,10 +1,10 @@
 <?php
-
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\BasisPengetahuan;
 use App\Models\Penyakit;
+use App\Models\Hasil; // Pastikan Anda mengimpor model Hasil
 use Illuminate\Http\Request;
 
 class ProsesApiController extends Controller
@@ -14,11 +14,13 @@ class ProsesApiController extends Controller
     {
         // Validasi input
         $validated = $request->validate([
+            'kambing' => 'required|exists:kambing,id', // Validasi ID kambing
             'gejala' => 'required|array|min:1', // Wajib ada array gejala
             'gejala.*' => 'exists:gejala,id',  // Gejala harus ada di tabel gejala
         ]);
 
         $selectedGejala = $validated['gejala'];
+        $kambingId = $validated['kambing']; // Ambil ID kambing dari request
 
         // Ambil data basis pengetahuan berdasarkan gejala yang dipilih
         $basisPengetahuans = BasisPengetahuan::with('penyakit')
@@ -33,11 +35,21 @@ class ProsesApiController extends Controller
             $matchedGejalaCount = $pengetahuans->count();
             $totalGejalaCount = BasisPengetahuan::where('penyakit_id', $penyakitId)->count();
 
+            $confidence = round(($matchedGejalaCount / $totalGejalaCount) * 100, 2);
+
+            // Simpan hasil ke tabel hasil
+            Hasil::create([
+                'kambing_id' => $kambingId, // ID kambing
+                'penyakit_id' => $penyakitId, // ID penyakit
+                'gejala' => json_encode($selectedGejala), // Simpan gejala yang dipilih
+                'confidence' => $confidence, // Simpan confidence
+            ]);
+
             $results[] = [
                 'penyakit' => $penyakit->nama,
                 'matched' => $matchedGejalaCount,
                 'total' => $totalGejalaCount,
-                'confidence' => round(($matchedGejalaCount / $totalGejalaCount) * 100, 2),
+                'confidence' => $confidence,
             ];
         }
 
