@@ -1,25 +1,35 @@
-@extends('dashboard.layouts.app')
+@extends('homepage.layouts.app')
 
 @section('content')
-    <div class="content-wrapper">
-        <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="page-heading header-text">
+        <div class="container">
             <div class="row">
-                <div class="col-lg-12 mb-4 order-0">
+                <div class="col-lg-12">
+                    <span class="breadcrumb"><a href="#">Home</a> / Diagnosis</span>
+                    <h3>Diagnosis</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="properties section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="card-title text-primary">Pilih Kambing dan Gejala</h5>
+                            <h4 class="text-success">Pilih Kambing dan Gejala</h4>
                             <div>
-                                <button class="btn btn-outline-secondary btn-sm me-2" id="refreshButton">
+                                <button class="btn btn-outline-secondary btn-sm" id="refreshButton">
                                     <i class="fa fa-refresh"></i> Refresh
                                 </button>
                                 <button class="btn btn-success btn-sm" id="printButton">
-                                    <i class="fa fa-print"></i> Cetak Hasil
+                                    <i class="fa fa-print"></i> Cetak PDF
                                 </button>
                             </div>
                         </div>
                         <div class="card-body">
-                            <form id="forwardChainingForm">
-                                <p class="mb-3">Pilih kambing yang akan didiagnosis:</p>
+                            <form id="diagnosisForm">
+                                <p>Pilih kambing yang akan didiagnosis:</p>
                                 <div class="mb-3">
                                     <select class="form-select" id="kambingSelect" name="kambing">
                                         <option value="" disabled selected>Pilih Kambing</option>
@@ -29,10 +39,10 @@
                                     </select>
                                 </div>
 
-                                <p class="mb-3">Pilih gejala yang sesuai dengan keadaan kambing:</p>
+                                <p>Pilih gejala yang sesuai dengan keadaan kambing:</p>
                                 <div class="row mb-3">
                                     @foreach ($gejalas as $gejala)
-                                        <div class="col-md-4 mb-2">
+                                        <div class="col-md-4">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" name="gejala[]"
                                                     value="{{ $gejala->id }}" id="gejala-{{ $gejala->id }}">
@@ -43,21 +53,20 @@
                                         </div>
                                     @endforeach
                                 </div>
-                                <div class="mt-4">
-                                    <button type="button" class="btn btn-primary" id="calculateButton">Lanjutkan</button>
-                                </div>
+
+                                <button type="button" class="btn btn-success" id="calculateButton">Lanjutkan</button>
                             </form>
                         </div>
 
-                        <div id="result" class="mt-4 px-3 mb-3"></div>
+                        <div id="result" class="mt-4"></div>
 
-                        <!-- Menampilkan Hasil Diagnosis -->
-                        <div class="mt-4 px-3 mb-3">
+                        <!-- Hasil Diagnosis Sebelumnya -->
+                        <div class="mt-4">
                             <h5>Hasil Diagnosis Sebelumnya:</h5>
                             @if ($hasil->isEmpty())
                                 <p>Tidak ada hasil diagnosis sebelumnya.</p>
                             @else
-                                <table class="table table-bordered mt-3" id="resultTable">
+                                <table class="table table-bordered" id="resultTable">
                                     <thead>
                                         <tr>
                                             <th>Penyakit</th>
@@ -86,78 +95,51 @@
     </div>
 
     <script>
-        // Tombol Refresh
-        document.getElementById('refreshButton').addEventListener('click', function() {
-            window.location.reload();
-        });
-
         // Tombol Cetak PDF
         document.getElementById('printButton').addEventListener('click', function() {
-            const kambing = document.getElementById('kambingSelect').selectedOptions[0]?.text;
-            const selectedGejala = Array.from(document.querySelectorAll('input[name="gejala[]"]:checked')).map(cb =>
-                cb.nextElementSibling.innerText);
-            const hasilDiagnosis = document.getElementById('result').innerHTML;
+            const resultContent = document.getElementById('result').innerHTML || document.getElementById(
+                'resultTable').outerHTML;
 
-            if (!kambing || selectedGejala.length === 0 || !hasilDiagnosis.trim()) {
-                alert('Pastikan semua data sudah tersedia untuk dicetak.');
+            if (!resultContent.trim()) {
+                alert('Tidak ada hasil untuk dicetak.');
                 return;
             }
 
-            const printContent = `
+            const newWindow = window.open('', '_blank');
+            newWindow.document.write(`
                 <html>
                 <head>
                     <title>Hasil Diagnosis</title>
                     <style>
-                        body { font-family: Arial, sans-serif; margin: 20px; color: #333; }
-                        h2, h3 { color: #007bff; }
-                        .section { margin-bottom: 30px; }
-                        .gejala-list, .hasil-diagnosis { margin-top: 20px; }
-                        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+                        body { font-family: Arial, sans-serif; margin: 20px; }
+                        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
                         table, th, td { border: 1px solid #ccc; text-align: left; padding: 8px; }
                         th { background-color: #f4f4f4; }
-                        .info { margin-bottom: 10px; font-size: 16px; }
+                        .title { font-size: 18px; font-weight: bold; margin-bottom: 10px; }
                     </style>
                 </head>
                 <body>
-                    <h2>Hasil Diagnosis</h2>
-                    <div class="section">
-                        <h3>Informasi Kambing</h3>
-                        <p class="info"><strong>Kambing:</strong> ${kambing}</p>
-                    </div>
-                    <div class="section">
-                        <h3>Gejala yang Dipilih</h3>
-                        <ul class="gejala-list">
-                            ${selectedGejala.map(gejala => `<li>${gejala}</li>`).join('')}
-                        </ul>
-                    </div>
-                    <div class="section">
-                        <h3>Hasil Diagnosis</h3>
-                        <div class="hasil-diagnosis">
-                            ${hasilDiagnosis}
-                        </div>
-                    </div>
+                    <div class="title">Hasil Diagnosis</div>
+                    ${resultContent}
                 </body>
                 </html>
-            `;
-
-            const newWindow = window.open('', '_blank');
-            newWindow.document.write(printContent);
+            `);
             newWindow.document.close();
             newWindow.print();
         });
 
         // Tombol Lanjutkan (Perhitungan)
         document.getElementById('calculateButton').addEventListener('click', function() {
-            const selectedKambing = document.getElementById('kambingSelect').value;
-            const selectedGejala = Array.from(document.querySelectorAll('input[name="gejala[]"]:checked')).map(cb =>
-                cb.value);
+            const kambing = document.getElementById('kambingSelect').value;
+            const gejala = Array.from(document.querySelectorAll('input[name="gejala[]"]:checked')).map(cb => cb
+                .value);
 
-            if (!selectedKambing) {
+            if (!kambing) {
                 alert('Pilih kambing yang akan didiagnosis.');
                 return;
             }
 
-            if (selectedGejala.length === 0) {
+            if (gejala.length === 0) {
                 alert('Pilih minimal satu gejala.');
                 return;
             }
@@ -169,16 +151,15 @@
                         "X-CSRF-TOKEN": "{{ csrf_token() }}",
                     },
                     body: JSON.stringify({
-                        kambing: selectedKambing,
-                        gejala: selectedGejala
+                        kambing,
+                        gejala
                     }),
                 })
                 .then(response => response.json())
                 .then(data => {
                     const resultDiv = document.getElementById('result');
                     if (data.success) {
-                        let resultHTML = '<h5>Hasil Diagnosis:</h5>';
-                        resultHTML += '<div class="row">';
+                        let resultHTML = '<h5>Hasil Diagnosis:</h5><div class="row">';
                         data.data.forEach(item => {
                             resultHTML += `
                                 <div class="col-md-6 mb-3">
@@ -199,6 +180,11 @@
                     }
                 })
                 .catch(error => console.error('Error:', error));
+        });
+
+        // Tombol Refresh
+        document.getElementById('refreshButton').addEventListener('click', function() {
+            window.location.reload();
         });
     </script>
 @endsection

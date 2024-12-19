@@ -26,6 +26,8 @@ Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 Route::get('/informasi', [HomepageController::class, 'informasi'])->name('informasi');
 Route::get('/metode', [HomepageController::class, 'metode'])->name('metode');
 Route::get('/kontak', [HomepageController::class, 'kontak'])->name('kontak');
+Route::get('/diagnosis', [HomepageController::class, 'diagnosis'])->name('diagnosis');
+Route::post('/proses/calculate', [ProsesController::class, 'calculate'])->name('api.proses.calculate');
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.process');
@@ -40,7 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('kegiatan', KegiatanController::class);
 
     Route::get('/proses', [ProsesController::class, 'index'])->name('proses.index');
-    Route::post('/proses/calculate', [ProsesApiController::class, 'calculate'])->name('api.proses.calculate');
+    // Route::post('/proses/calculate', [ProsesController::class, 'calculate'])->name('api.proses.calculate');
 
 
     Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');

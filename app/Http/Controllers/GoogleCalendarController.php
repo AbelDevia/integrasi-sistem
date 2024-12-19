@@ -25,9 +25,8 @@ class GoogleCalendarController extends Controller
     
         // Jika token tidak ada, arahkan ke halaman login Google
         if (!$token) {
-            return redirect('/auth/google')->withErrors('Google token not found.');
+            return redirect('/auth/google');
         }
-    
         // Membuat client Google
         $client = new \Google\Client();
     

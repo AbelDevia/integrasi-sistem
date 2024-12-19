@@ -15,11 +15,15 @@
                                 class="{{ Request::is('informasi') ? 'active' : '' }}">Informasi</a></li>
                         <li><a href="{{ route('metode') }}"
                                 class="{{ Request::is('metode') ? 'active' : '' }}">Metode</a></li>
+                        <li><a href="{{ route('diagnosis') }}"
+                                class="{{ Request::is('diagnosis') ? 'active' : '' }}">Diagnosis</a></li>
                         <li><a href="{{ route('kontak') }}"
                                 class="{{ Request::is('kontak') ? 'active' : '' }}">Kontak</a></li>
-                        <li><a href="{{ route('login') }}" class="{{ Request::is('login') ? 'active' : '' }}"><i
-                                    class="fa fa-key"></i> Login</a></li>
+                        <li><a href="{{ route('login') }}" class="{{ Request::is('login') ? 'active' : '' }}">
+                                <i class="fa fa-key"></i> Login</a>
+                        </li>
                     </ul>
+
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
