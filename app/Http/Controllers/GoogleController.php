@@ -44,10 +44,10 @@ class GoogleController extends Controller
             Auth::login($user);
     
             // Redirect ke halaman dashboard setelah login
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/kegiatan');
         } catch (\Exception $e) {
             // Jika terjadi kesalahan saat login dengan Google
-            return redirect('/login')->withErrors(['msg' => 'Login with Google failed!']);
+            return redirect('/kegiatan')->withErrors(['msg' => 'Login with Google failed!']);
         }
     }
 }
