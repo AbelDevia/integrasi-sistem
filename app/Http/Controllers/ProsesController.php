@@ -73,7 +73,7 @@ class ProsesController extends Controller
                 }
             }
         }
-    
+     
         // Hitung persentase kecocokan
         $results = [];
         foreach ($aturan as $penyakitId => $data) {

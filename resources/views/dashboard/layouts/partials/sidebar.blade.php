@@ -68,7 +68,7 @@
              </a>
          </li>
 
-         <li class="menu-item {{ request()->routeIs('kambings.*') ? 'active' : '' }}">
+         <li class="menu-item {{ request()->routeIs('kambing.*') ? 'active' : '' }}">
              <a href="{{ route('kambing.index') }}" class="menu-link">
                  <i class="menu-icon tf-icons bx bx-bug-alt"></i>
                  <div data-i18n="Kambing">Data Kambing</div>

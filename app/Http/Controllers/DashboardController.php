@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Dashboard;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard.index'); // Pastikan view ini ada di resources/views/dashboard/index.blade.php
+        $data = array_merge(
+            Dashboard::getTotals(),
+            Dashboard::getRecentData()
+        );
+
+        return view('dashboard.index', compact('data'));
     }
 }
