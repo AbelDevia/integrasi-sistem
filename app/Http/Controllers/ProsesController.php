@@ -107,5 +107,77 @@ class ProsesController extends Controller
             'data' => $results,
         ], 200);
     }
+
+    public function calculate_free(Request $request)
+{
+    // Validasi input hanya untuk gejala
+    $validated = $request->validate([
+        'gejala' => 'required|array|min:1', // Wajib ada array gejala
+        'gejala.*' => 'exists:gejala,id',  // Gejala harus ada di tabel gejala
+    ]);
+
+    $selectedGejala = $validated['gejala']; // Ambil gejala yang dipilih
+
+    // Ambil data basis pengetahuan
+    $basisPengetahuans = BasisPengetahuan::with(['penyakit', 'gejala'])->get();
+
+    // Kelompokkan aturan berdasarkan penyakit
+    $aturan = [];
+    foreach ($basisPengetahuans as $bp) {
+        $penyakitId = $bp->penyakit_id;
+        if (!isset($aturan[$penyakitId])) {
+            $aturan[$penyakitId] = [
+                'total_gejala' => 0,
+                'matched_gejala' => 0,
+                'key_gejala' => [],
+            ];
+        }
+        $aturan[$penyakitId]['total_gejala']++;
+    }
+
+    // Periksa gejala yang cocok dengan basis pengetahuan
+    foreach ($basisPengetahuans as $bp) {
+        if (in_array($bp->gejala_id, $selectedGejala)) {
+            $penyakitId = $bp->penyakit_id;
+            $jenis = $bp->relasi_gejala; // "OR" atau "AND"
+            $keyGejala = $bp->key_gejala;
+
+            if ($jenis === 'OR') {
+                if (!in_array($keyGejala, $aturan[$penyakitId]['key_gejala'])) {
+                    $aturan[$penyakitId]['key_gejala'][] = $keyGejala;
+                    $aturan[$penyakitId]['matched_gejala']++;
+                }
+            } else { // "AND"
+                $aturan[$penyakitId]['matched_gejala']++;
+            }
+        }
+    }
+
+    // Hitung persentase kecocokan
+    $results = [];
+    foreach ($aturan as $penyakitId => $data) {
+        $confidence = round(($data['matched_gejala'] / $data['total_gejala']) * 100, 2);
+        $penyakit = Penyakit::find($penyakitId);
+
+        $results[] = [
+            'penyakit' => $penyakit->nama,
+            'matched' => $data['matched_gejala'],
+            'total' => $data['total_gejala'],
+            'confidence' => $confidence,
+        ];
+    }
+
+    // Urutkan berdasarkan confidence tertinggi
+    usort($results, function ($a, $b) {
+        return $b['confidence'] <=> $a['confidence'];
+    });
+
+    // Kembalikan hasil dalam format JSON
+    return response()->json([
+        'success' => true,
+        'data' => $results,
+    ], 200);
+}
+
     
 }

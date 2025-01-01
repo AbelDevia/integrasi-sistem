@@ -28,6 +28,7 @@ Route::get('/metode', [HomepageController::class, 'metode'])->name('metode');
 Route::get('/kontak', [HomepageController::class, 'kontak'])->name('kontak');
 Route::get('/diagnosis', [HomepageController::class, 'diagnosis'])->name('diagnosis');
 Route::post('/proses/calculate', [ProsesController::class, 'calculate'])->name('api.proses.calculate');
+Route::post('/proses/calculate_free', [ProsesController::class, 'calculate_free'])->name('api.proses.calculate_free');
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.process');
