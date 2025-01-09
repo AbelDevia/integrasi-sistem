@@ -118,7 +118,7 @@
          <li class="menu-item {{ request()->routeIs('proses.*') ? 'active' : '' }}">
              <a href="{{ route('proses.index') }}" class="menu-link">
                  <i class="menu-icon tf-icons bx bx-calculator"></i>
-                 <div data-i18n="Proses">Proses</div>
+                 <div data-i18n="Proses">Diagnosis Penyakit</div>
              </a>
          </li>
 
